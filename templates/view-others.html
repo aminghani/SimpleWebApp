@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/view-others.css">
+</head>
+<body>
+<div id="user-list">
+    {% if users %}
+        {% for user in users %}
+            <div class="message">
+                <span class="username">{{ user.username }}</span>
+                <p class="fullname">{{ user.full_name }}</p>
+                <p class="fullname">{{ user.email }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Info Form</title>
+    <link rel="stylesheet" href="../static/info-edit.css">
+  </head>
+  <body>
+    <form method="post" action="/edit-info-save/">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="{{ email }}">
+
+      <label for="full-name">Full Name:</label>
+      <input type="text" id="full-name" name="full_name" value="{{ full_name }}">
+
+      <input type="submit" value="Save Changes">
+    </form>
+  </body>
+</html>

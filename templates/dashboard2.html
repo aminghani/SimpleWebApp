@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Info</title>
+	<link rel="stylesheet" href="../static/dashboard2.css">
+</head>
+<body>
+	<div class="container">
+		<h1>User Info</h1>
+		<p>Full Name: {{ full_name }}</p>
+		<p>Username: {{ username }}</p>
+		<p>Email: {{ email }}</p>
+		<button onclick="location.href='/edit-info'">Change Info</button>
+		<button onclick="location.href='/edit-pass'">Change Password</button>
+		<button onclick="location.href='/chat'">Public Chat</button>
+		<button onclick="location.href='/view-users'">View Others</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        form input,
+        form textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #555;
+        }
+
+        .message {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message .username {
+            display: inline-block;
+            margin-right: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .message .time {
+            display: inline-block;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .message p {
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Messages</h1>
+    <form method="post" id="message-form">
+    <label for="message">Message:</label>
+    <textarea name="message" required></textarea>
+    <button type="submit">Post Message</button>
+</form>
+<div id="message-list">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">
+                <span class="username">{{ message.username }}</span>
+                <span class="time">{{ message.timestamp }}</span>
+                <p>{{ message.message }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No messages.</p>
+    {% endif %}
+</div>
+<script>
+    const form = document.getElementById("message-form");
+    const messageList = document.getElementById("message-list");
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        try {
+            const response = await fetch("/post_message/", {
+                method: "POST",
+                body: formData,
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message);
+                location.reload();
+            } else {
+                alert("An error occurred. Please try again.");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("An error occurred. Please try again.");
+        }
+    });
+</script>
+</body>
+</html>
